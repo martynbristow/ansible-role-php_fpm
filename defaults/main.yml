@@ -1,0 +1,23 @@
+---
+
+php_fpm_repository: false
+php_fpm_timezone: Europe/Kiev
+
+php_fpm_pools: false
+php_fpm_owner: "nginx"
+php_fpm_group: "nginx"
+
+php_fpm_install:
+  - php5-cli
+  - php5-fpm
+
+php_fpm_pools_disable:
+  - www.conf
+
+php_fpm_configure:
+  - file: /etc/php5/cli/php.ini
+    values:
+      - { section: date, key: date.timezone, value: '{{ php_fpm_timezone }}' }
+  - file: /etc/php5/fpm/php.ini
+    values:
+      - { section: date, key: date.timezone, value: '{{ php_fpm_timezone }}' }

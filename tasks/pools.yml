@@ -1,0 +1,26 @@
+---
+
+- name: PHP_FPM | Create sockets directory
+  file:
+    path: /var/run/php-fpm/
+    state: directory
+    owner: "{{ php_fpm_owner }}"
+    group: "{{ php_fpm_group }}"
+    mode: "g+rw"
+
+- name: PHP_FPM | Disable default pool
+  file:
+    path: "/etc/php5/fpm/pool.d/{{ item }}"
+    state: absent
+  with_items: php_fpm_pools_disable
+  notify: restart php-fpm
+
+- name: PHP_FPM | Copy php-fpm pools configurations
+  template:
+    src: "{{ playbook_dir }}/{{ item.value.src }}"
+    dest: "/etc/php5/fpm/pool.d/{{ item.value.dest }}"
+    owner: "{{ php_fpm_owner }}"
+    group: "{{ php_fpm_group }}"
+  with_dict: php_fpm_pools
+  when: php_fpm_pools != false
+  notify: restart php-fpm

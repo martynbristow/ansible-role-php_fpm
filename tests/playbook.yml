@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  sudo: true
+
+  vars:
+    app_name: my_app
+    php_fpm_owner: vagrant
+    php_fpm_group: vagrant
+    php_fpm_pools:
+      myapp:
+        src: "templates/pool.conf.j2"
+        dest: "{{ app_name }}.conf"
+
+  pre_tasks:
+    - apt: update_cache=yes
+      when: ansible_ssh_user == 'vagrant'
+  roles:
+    - { role: ../../igor_mukhin.php_fpm, tags: php }
+    # - { role: ../../ansible-role-php_fpm, tags: php }
