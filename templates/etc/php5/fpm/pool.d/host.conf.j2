@@ -1,0 +1,17 @@
+[php]
+
+listen = 127.0.0.1:{{ item.value.port|default(7777) }}
+listen.owner = {{ item.value.owner|default(php_fpm_owner) }}
+listen.group = {{ item.value.group|default(php_fpm_group) }}
+listen.mode = 0660
+
+user  = {{ item.value.owner|default(php_fpm_owner) }}
+group = {{ item.value.group|default(php_fpm_group) }}
+
+pm = static
+pm.max_children = 20
+pm.max_requests = 5000
+pm.process_idle_timeout = 20s
+pm.status_path = /php-status
+
+catch_workers_output = yes

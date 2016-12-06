@@ -12,10 +12,10 @@ php_fpm_install:
   - php5-xdebug
 
 php_fpm_configure:
-  - file: /etc/php5/cli/php.ini
+  - file: {{ php_fpm_path }}/cli/php.ini
     values:
       - { section: date, key: date.timezone, value: '{{ php_timezone }}' }
-  - file: /etc/php5/mods-available/xdebug.ini
+  - file: {{ php_fpm_path }}/mods-available/xdebug.ini
     values:
       - { section: date, key: date.timezone, value: '{{ php_timezone }}' }
       - { section: xdebug, key: xdebug.idekey, value: my-idekey }
@@ -53,6 +53,15 @@ pm.process_idle_timeout = 20s
 roles:
   - role: igor_mukhin.php_fpm
     tags: php
+```
+
+## Migrating to php7
+
+```
+php_fpm_repository: "ppa:ondrej/php"
+php_fpm_install:
+  - php7.0-fpm
+php_fpm_path: "/etc/php/7.0"
 ```
 
 ## Authors

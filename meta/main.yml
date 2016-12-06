@@ -2,7 +2,7 @@
 
 galaxy_info:
   author: igor_mukhin
-  description: Install and Configure PHP-FPM
+  description: Install and Configure PHP-FPM (php5, php7.0)
   license: MIT
   min_ansible_version: 1.4
   platforms:

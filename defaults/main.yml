@@ -3,7 +3,19 @@
 php_fpm_repository: false
 php_fpm_timezone: Europe/Kiev
 
+php_fpm_template: "etc/php5/fpm/pool.d/host.conf.j2"
+
 php_fpm_pools: false
+#php_fpm_pools:
+#  minimal:
+#    dest: "php7-fpm.conf"
+#    port: 7777
+#  magento:
+#    src: "{{ playbook_dir }}/templates/etc/php5/fpm/pool.d/host.conf.j2"
+#    dest: "php7-fpm.conf"
+#    socket: "php7-fpm.sock"
+#    port: 7777
+
 php_fpm_owner: "nginx"
 php_fpm_group: "nginx"
 
@@ -14,10 +26,11 @@ php_fpm_install:
 php_fpm_pools_disable:
   - www.conf
 
+php_fpm_path: "/etc/php5"
 php_fpm_configure:
-  - file: /etc/php5/cli/php.ini
+  - file: "{{ php_fpm_path }}/cli/php.ini"
     values:
       - { section: date, key: date.timezone, value: '{{ php_fpm_timezone }}' }
-  - file: /etc/php5/fpm/php.ini
+  - file: "{{ php_fpm_path }}/fpm/php.ini"
     values:
       - { section: date, key: date.timezone, value: '{{ php_fpm_timezone }}' }
