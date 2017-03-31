@@ -58,10 +58,13 @@ roles:
 ## Migrating to php7
 
 ```
+# Use this repository if you want to install php7.0 on Ubuntu 14
+# You don't need it on Ubuntu 16
 php_fpm_repository: "ppa:ondrej/php"
 php_fpm_install:
   - php7.0-fpm
 php_fpm_path: "/etc/php/7.0"
+php_fpm_service: "php7.0-fpm"
 ```
 
 ## Authors
