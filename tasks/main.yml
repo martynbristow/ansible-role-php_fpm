@@ -3,4 +3,4 @@
 - include: install.yml
 - include: configure.yml
 - include: pools.yml
-  where: php_fpm_pools != false
+  when: "{{ php_fpm_pools != false }}"

@@ -4,11 +4,11 @@
   apt_repository:
     repo: "{{ php_fpm_repository }}"
     update_cache: yes
-  when: php_fpm_repository != false
+  when: "{{ php_fpm_repository != false }}"
 
 - name: PHP_FPM | Install | Packages
   apt:
     pkg: "{{ item }}"
     state: present
   with_items: php_fpm_install
-  when: php_fpm_install != false
+  when: "{{ php_fpm_install != false }}"
