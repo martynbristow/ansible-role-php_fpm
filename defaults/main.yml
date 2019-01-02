@@ -5,7 +5,7 @@ php_fpm_timezone: Europe/Kiev
 
 php_fpm_template: "etc/php5/fpm/pool.d/host.conf.j2"
 php_fpm_service: "php5-fpm"
-php_fpm_pools: false
+php_fpm_pools: {}
 #php_fpm_pools:
 #  minimal:
 #    dest: "php7-fpm.conf"

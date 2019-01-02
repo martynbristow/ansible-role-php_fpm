@@ -21,6 +21,5 @@
     dest: "{{ php_fpm_path }}/fpm/pool.d/{{ item.value.dest|default(item.key ~ '.conf') }}"
     owner: "{{ php_fpm_owner }}"
     group: "{{ php_fpm_group }}"
-  with_dict: "{{ php_fpm_pools }}"
-  when: "{{ php_fpm_pools != false }}"
+  with_dict: "{{ php_fpm_pools | default({}) }}" 
   notify: restart php-fpm
